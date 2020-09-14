@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "start": "nodemon --exec babel-node app.js",
-    "start-dev": "export NODE_ENV=developer && npx babel-node app.js",
+    "start-dev": "export NODE_ENV=developer && babel-node app.js",
     "build": "npm run clean && mkdir dist && babel app.js -s -d dist",
     "": ""
   },
@@ -27,7 +27,12 @@
     "morgan": "^1.10.0",
     "winston": "^3.3.3",
     "winston-mongodb": "^5.0.3",
-    "wpapi": "^1.2.1"
+    "wpapi": "^1.2.1",
+    "@babel/core": "^7.11.4",
+    "@babel/node": "^7.10.5",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
