@@ -4,6 +4,6 @@
   },
   "baseUrl": "https://masterblog-dev.herokuapp.com/",
   "port": 80,
-  "frontUrl": "https://masterblog-dev.herokuapp.com/",
+  "frontUrl": "https://masterblog-dev.herokuapp.com",
   "oauth2redirect": "https://masterblog-dev.herokuapp.com/main"
 }
