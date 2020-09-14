@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "start": "nodemon --exec babel-node app.js",
-    "start-dev": "export NODE_ENV=developer && node --exec babel-node app.js",
+    "start-dev": "export NODE_ENV=developer && npx babel-node app.js",
     "build": "npm run clean && mkdir dist && babel app.js -s -d dist",
     "": ""
   },
