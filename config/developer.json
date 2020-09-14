@@ -2,7 +2,7 @@
   "database": {
     "masterblog": "mongodb+srv://masterblog:adminmasterblog@cluster0.nwfuy.gcp.mongodb.net/masterblog?retryWrites=true&w=majority"
   },
-  "baseUrl": "https://masterblog-dev.herokuapp.com/",
+  "baseUrl": "https://masterblog-dev.herokuapp.com",
   "port": 80,
   "frontUrl": "https://masterblog-dev.herokuapp.com",
   "oauth2redirect": "https://masterblog-dev.herokuapp.com/main"
