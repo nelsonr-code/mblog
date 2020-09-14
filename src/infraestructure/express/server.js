@@ -6,7 +6,7 @@ import logger from "../logger";
 import Routes from "../../api/routes";
 
 class Server {
-  static appPort = config.get("port");
+  static appPort = process.env.PORT || config.get("port");
 
   constructor() {
     this._app = null;
