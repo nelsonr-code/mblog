@@ -2,6 +2,7 @@ import { SocialMediaService } from "../SocialMediaService";
 import config from "config";
 import logger from "../../infraestructure/logger";
 import { FacebookPostMap } from "./Models/FacebookAttachmentData";
+import querystring from 'querystring';
 
 export class FacebookService extends SocialMediaService {
   static BASE_URL = "https://graph.facebook.com/v6.0";
@@ -18,7 +19,7 @@ export class FacebookService extends SocialMediaService {
         params: {
           client_id: process.env.FACEBOOK_KEY,
           client_secret: process.env.FACEBOOK_SECRET,
-          redirect_uri: `${FacebookService.REDIRECT_URI}/${userId}/`,
+          redirect_uri: querystring.encode(`${FacebookService.REDIRECT_URI}?userId=${userId}`),
           code,
         },
       })

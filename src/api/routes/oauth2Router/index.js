@@ -12,7 +12,7 @@ const instagramRedirectController = new InstagramRedirectController();
 const instagramCallbackController = new InstagramCallbackController();
 
 oauth2Router.route('/facebook').get((req, res) => oauthRedirectController.execute(req, res));
-oauth2Router.route('/facebook/callback/:userId').get((req, res) => facebookCallbackController.execute(req, res));
+oauth2Router.route('/facebook/callback').get((req, res) => facebookCallbackController.execute(req, res));
 
 // Instagram
 // Definition: 'api/v1/oauth2/instagram'
