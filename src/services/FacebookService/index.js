@@ -63,7 +63,7 @@ export class FacebookService extends SocialMediaService {
   getOauth2Url(email, userId) {
     return [
       `https://www.facebook.com/v6.0/dialog/oauth?app_id=528622281368798&`,
-      `redirect_uri=${FacebookService.REDIRECT_URI}/${userId}/`,
+      `redirect_uri=${querystring.encode(`${FacebookService.REDIRECT_URI}?userId=${userId}`) }`,
       `&state={"user" : "${email}"}`,
       `&scope=email,user_posts,user_location,user_status,user_videos,user_friends`,
       `,user_likes,user_link,user_photos`,
