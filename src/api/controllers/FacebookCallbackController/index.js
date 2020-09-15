@@ -22,7 +22,7 @@ export class FacebookCallbackController extends BaseController {
       console.log("el fucking params del callback", req.params);
       if(!req.query.code) throw new CodeNotProvided();
   
-      const user = await this.userRepository.findById(req.query.state.user);
+      const user = await this.userRepository.findById(JSON.parse(req.query.state).user);
       if(!user) throw new UserNotFound();
 
       this.logger().info("User found", user.profile)
