@@ -19,7 +19,7 @@ export class FacebookService extends SocialMediaService {
         params: {
           client_id: process.env.FACEBOOK_KEY,
           client_secret: process.env.FACEBOOK_SECRET,
-          redirect_uri: querystring.encode(`${FacebookService.REDIRECT_URI}?userId=${userId}`),
+          redirect_uri: querystring.encode(`${FacebookService.REDIRECT_URI}`),
           code,
         },
       })
@@ -61,13 +61,13 @@ export class FacebookService extends SocialMediaService {
   }
 
   getOauth2Url(email, userId) {
-    let uri = encodeURI(`${FacebookService.REDIRECT_URI}?userId=${userId}`);
+    let uri = encodeURI(`${FacebookService.REDIRECT_URI}`);
     console.log("uri sincoded", `${FacebookService.REDIRECT_URI}?userId=${userId}`);
     console.log("uri encoded", uri);
     return [
       `https://www.facebook.com/v6.0/dialog/oauth?app_id=528622281368798&`,
       `redirect_uri=${ uri }`,
-      `&state={"user" : "${email}"}`,
+      `&state={"user" : "${userId}"}`,
       `&scope=email,user_posts,user_location,user_status,user_videos,user_friends`,
       `,user_likes,user_link,user_photos`,
     ].join("");
