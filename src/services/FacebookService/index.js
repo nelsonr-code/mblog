@@ -61,7 +61,8 @@ export class FacebookService extends SocialMediaService {
   }
 
   getOauth2Url(email, userId) {
-    let uri = querystring.encode(`${FacebookService.REDIRECT_URI}?userId=${userId}`);
+    let uri = encodeURI(`${FacebookService.REDIRECT_URI}?userId=${userId}`);
+    console.log("uri sincoded", `${FacebookService.REDIRECT_URI}?userId=${userId}`);
     console.log("uri encoded", uri);
     return [
       `https://www.facebook.com/v6.0/dialog/oauth?app_id=528622281368798&`,
