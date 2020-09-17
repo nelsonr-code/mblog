@@ -13,7 +13,6 @@ export class FacebookService extends SocialMediaService {
 
   getAccessToken(code, userId) {
     let url = `${FacebookService.BASE_URL}/oauth/access_token`;
-    console.log("redirect de facebook????", FacebookService.REDIRECT_URI);
     return this.http()
       .get(url, {
         params: {
