@@ -27,6 +27,7 @@ export const FacebookPostsList = () => {
   }
 
   const configuration = {
+    title: t("ondemand", {es: 'Posts de facebook', en: 'Facebook posts'}),
     options: {
       filtering: false,
       paginationType: 'stepped',

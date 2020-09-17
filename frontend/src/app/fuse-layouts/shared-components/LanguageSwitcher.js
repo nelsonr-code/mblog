@@ -20,15 +20,10 @@ const languages = [
     flag: "us",
   },
   {
-    id: "tr",
-    title: "Turkish",
-    flag: "tr",
-  },
-  {
-    id: "ar",
-    title: "Arabic",
+    id: "es",
+    title: "Español",
     flag: "sa",
-  },
+  }
 ];
 
 function LanguageSwitcher(props) {
@@ -106,15 +101,6 @@ function LanguageSwitcher(props) {
             <ListItemText primary={lng.title} />
           </MenuItem>
         ))}
-
-        <MenuItem
-          component={Link}
-          to="/documentation/working-with-fuse-react/multi-language"
-          onClick={userMenuClose}
-          role="button"
-        >
-          <ListItemText primary="Learn More" />
-        </MenuItem>
       </Popover>
     </React.Fragment>
   );
