@@ -7,19 +7,20 @@ const defaultOptions = {
   actionsColumnIndex: -1,
   pageSize: 25,
   pageSizeOptions: [25, 50, 100],
-  maxBodyHeight: "350px",
+  maxBodyHeight: "500px",
   thirdSortClick: false,
   emptyRowsWhenPaging: false,
   loadingType: 'linear'
 };
 
 export const CustomTable = ({ configuration }) => {
+  console.log("configuration.options???", configuration.options)
   return (
     <MaterialTable
       data={configuration.data}
       columns={configuration.columns}
       actions={[ ...configuration.actions]}
-      options={{ ...defaultOptions, ...(configuration.options || {}) }}
+      options={{ ...defaultOptions, ...(configuration.options || {})}}
       isLoading={configuration.isLoading === true}
     />
   );

@@ -32,6 +32,7 @@ export const FacebookPostsList = () => {
       paginationType: 'stepped',
       showFirstLastPageButtons: false,
       pageSizeOptions: [25],
+      padding: 'dense'
     },
     data: loadPosts,
     columns: [
@@ -50,6 +51,7 @@ export const FacebookPostsList = () => {
       {
         icon: "refresh",
         isFreeAction: true,
+        onClick: console.log
       },
       {
         icon: 'visibility',

@@ -16,10 +16,12 @@ export const ApplicationConfig = {
       config: {
         scroll: 'content',
         toolbar: {
-          display: true
+          display: true,
         },
         footer: {
-          display: true
+          display: true,
+          style: "static",
+          position: "below",
         },
         navbar: {
           display: true,

@@ -39,6 +39,7 @@ export const WordpressPostsList = () => {
   const configuration = {
     options: {
       filtering: true,
+      padding: 'dense'
     },
     data: posts,
     columns: [

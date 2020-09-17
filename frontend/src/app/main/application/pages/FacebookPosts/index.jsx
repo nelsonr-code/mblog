@@ -8,11 +8,6 @@ export const FacebookPosts = () => {
 
   return (
     <FusePageSimple
-      header={
-        <div className="p-24 text-center flex">
-          <h1>{t("FacebookPosts")}</h1>
-        </div>
-      }
       content={
         <div className="p-24 flex flex-col flex-1 justify-center h-full">
           <FacebookPostsList />
