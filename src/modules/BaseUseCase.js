@@ -15,7 +15,7 @@ export class BaseUseCase {
     try {
       return await this.executeImpl.apply(this, args);
     } catch (err) {
-      this.logger().error("[Base use case]: use case error", err);
+      this.logger().error("[Base use case]: use case error");
       throw err;
     }
   }

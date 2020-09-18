@@ -4,14 +4,31 @@ import { CustomTable } from "app/main/shared/CustomTable";
 import { CustomDate } from "app/main/shared/CustomDate";
 import { ErrorFetchingPosts } from "../../../WordpressPosts/components/WordpressPostsList";
 import { useFacebookHelper } from "app/hooks/useFacebookHelper";
-import { Button, IconButton } from "@material-ui/core";
 import { FacebookPostPreview } from "app/main/application/pages/FacebookPosts/components/FacebookPostPreview";
 import { useDialog } from "app/hooks/useDialog";
-export const FacebookPostsList = () => {
-  const { loadPosts, loading, error, repostToWordpress, getPostById } = useFacebookHelper();
-  const { t } = useTranslation("main");
+import { DateCustomFilter } from "app/main/shared/DateCustomFilter";
+import moment from "moment";
 
-  const {open} = useDialog();
+export const FacebookPostsList = () => {
+  const {
+    posts,
+    loadPosts,
+    loading,
+    error,
+    repostToWordpress,
+    getPostById,
+  } = useFacebookHelper();
+  const { t } = useTranslation("main");
+  const tableRef = React.useRef();
+  const { open } = useDialog();
+
+  const defaultRange = {
+    startDate: moment().subtract(1, "week").toDate(),
+    endDate: moment().toDate(),
+    key: "selection",
+  };
+
+  const [dateRange, setDateRange] = React.useState(defaultRange);
 
   const showFacebookPost = async (e, data) => {
     const post = await getPostById(data.id);
@@ -19,45 +36,75 @@ export const FacebookPostsList = () => {
     const a = await open({
       Component: FacebookPostPreview,
       props: {
-        post
-      }
+        post,
+      },
     });
 
     console.log("desde el modal", a);
-  }
+  };
+
+  React.useEffect(() => {
+    loadPosts({
+      dateFilter: defaultRange,
+    });
+  }, []);
+
+  const handleRangeDateSelect = (data) => {
+    console.log("el filtrico por aqui", data);
+    setDateRange(data);
+    loadPosts({
+      dateFilter: {
+        startDate: data.startDate,
+        endDate: data.endDate,
+      },
+    });
+  };
 
   const configuration = {
-    title: t("ondemand", {es: 'Posts de facebook', en: 'Facebook posts'}),
+    title: t("ondemand", { es: "Posts de facebook", en: "Facebook posts" }),
     options: {
-      filtering: false,
-      paginationType: 'stepped',
-      showFirstLastPageButtons: false,
-      pageSizeOptions: [25],
-      padding: 'dense'
+      filtering: true,
+      pageSizeOptions: [25, 50, 100],
+      padding: "dense",
     },
-    data: loadPosts,
+    loading,
+    data: posts,
     columns: [
       {
-        field: "creation_date",
+        field: "created_time",
         title: t("ondemand", { es: "Fecha", en: "Date" }),
-        render: ({ creation_date: date }) => <CustomDate {...{ date }} />,
-        filtering: false,
+        render: ({ created_time: date }) => <CustomDate {...{ date }} />,
+        filtering: true,
+        filterComponent: (props) => (
+          <DateCustomFilter
+            {...props}
+            onApplyFilter={handleRangeDateSelect}
+            defaultRange={dateRange}
+          />
+        ),
       },
       {
+        width: "85%",
         field: "message",
         title: t("ondemand", { es: "Mensaje", en: "Message" }),
-      }
+      },
     ],
     actions: [
       {
         icon: "refresh",
         isFreeAction: true,
-        onClick: console.log
+        onClick: () =>
+          loadPosts({
+            dateFilter: {
+              startDate: dateRange.startDate,
+              endDate: dateRange.endDate,
+            },
+          }),
       },
       {
-        icon: 'visibility',
-        onClick: showFacebookPost
-      }
+        icon: "visibility",
+        onClick: showFacebookPost,
+      },
     ],
   };
   return (
@@ -65,8 +112,9 @@ export const FacebookPostsList = () => {
       <ErrorFetchingPosts
         name="Facebook"
         visible={error}
+        retryAction={() => loadPosts({ dateFilter: dateRange })}
       />
-      <CustomTable configuration={configuration} />
+      <CustomTable configuration={configuration} ref={tableRef} />
     </>
   );
 };

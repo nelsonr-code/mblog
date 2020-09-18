@@ -11,8 +11,9 @@ export class GetFacebookPostsController extends BaseController {
 
   async executeImpl(req, res) {
     const { userId }  = req.params;
+    const { since, until } = req.query;
 
-    const data = await this.getFacebookPosts.executeImpl({ userId });
+    const data = await this.getFacebookPosts.executeImpl({ userId, since, until });
 
     return this.ok(res, data);
 

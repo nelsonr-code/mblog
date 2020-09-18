@@ -18,7 +18,7 @@ export class BaseController {
     try {
       await this.executeImpl(req, res);
     } catch (err) {
-      this.logger().error("[Base controller]: Caught controller error", err);
+      this.logger().error("[Base controller]: Caught controller error");
       if(err instanceof BaseError) {
         return this.clientError(res, err);
       }

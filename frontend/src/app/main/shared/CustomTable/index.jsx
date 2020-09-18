@@ -12,9 +12,11 @@ const defaultOptions = {
   loadingType: "linear",
 };
 
-export const CustomTable = ({ configuration }) => {
+
+export const CustomTable = React.forwardRef(({ configuration }, ref) => {
   return (
     <MaterialTable
+      tableRef={ref}
       title={configuration.title || ""}
       data={configuration.data}
       columns={configuration.columns}
@@ -23,4 +25,4 @@ export const CustomTable = ({ configuration }) => {
       isLoading={configuration.isLoading === true}
     />
   );
-};
+});

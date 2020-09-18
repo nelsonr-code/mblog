@@ -12,8 +12,8 @@ export class MainService {
     return axios.get('/api/v1/wordpress/posts/' + userId).then(complete);
   }
 
-  getFacebookPosts(userId) {
-    return axios.get(`/api/v1/user/${ userId }/facebook/posts/`).then(complete);
+  getFacebookPosts(userId, query) {
+    return axios.get(`/api/v1/user/${ userId }/facebook/posts/${ query }`).then(complete);
   }
 
   getFacebookPostById(userId, postId) {
