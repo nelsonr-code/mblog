@@ -20,9 +20,9 @@ export const DateRangePicker = (props) => {
       moveRangeOnFirstSelection={false}
       ranges={state}
       showPreview={false}
-      showMonthAndYearPickers={false}
       dateInput={false}
       editableDateInputs={false}
+      
     />
   );
 };

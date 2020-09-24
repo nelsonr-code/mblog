@@ -11,7 +11,7 @@ export const DateCustomFilter = (props) => {
   const [range, setRange] = React.useState(props.defaultRange);
   const [backupRange, setBackuprange] = React.useState(props.defaultRange);
 
-  const handleClick = (e) => setAnchorEl(e.currentTarget);
+  const handleClick = (e) => !anchorEl && setAnchorEl(e.currentTarget);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -48,7 +48,7 @@ export const DateCustomFilter = (props) => {
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
         transformOrigin={{ vertical: "top", horizontal: "left" }}
       >
-        <MenuItem>
+        {/* <MenuItem> */}
         <div>
           <DateRangePicker defaultRange={ range } onChange={ handleChange }/>
           <Box display="flex" justifyContent="flex-end" py={1}>
@@ -64,7 +64,7 @@ export const DateCustomFilter = (props) => {
             </Box>
           </Box>
         </div>
-        </MenuItem>
+        {/* </MenuItem> */}
       </Menu>
     </div>
   );
