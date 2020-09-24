@@ -11,31 +11,57 @@ export class FacebookAttachmentData {
   }
 
   getAttachments2() {
-    if(!this.subattachments) {
-      return [{
-        src: this.type === "video" || this.type === "video_inline" ? this.media.source : this.media.image.src,
-        title: this.title,
-        type: this.type
-      }];
+    if (!this.subattachments) {
+      if (this.type === "video" || this.type === "video_inline") {
+        return [
+          {
+            src: this.media.source,
+            title: this.title,
+            type: this.type,
+          },
+        ];
+      } else if (this.type === "photo") {
+        return [
+          {
+            src: this.media.image.src,
+            title: this.title,
+            type: this.type,
+          },
+        ];
+      } else {
+        return [
+          {
+            title: this.title,
+            type: this.type,
+          },
+        ];
+      }
     }
   }
 
   getAttachments() {
-    if(!this.subattachments) {
+    if (!this.subattachments) {
       return {
-        resources: [{
-          src: this.type === "video" || this.type === "video_inline" ? this.media.source : this.media.image.src,
-          title: this.title,
-          type: this.type
-        }]
+        resources: [
+          {
+            src:
+              this.type === "video" || this.type === "video_inline"
+                ? this.media.source
+                : this.media.image.src,
+            title: this.title,
+            type: this.type,
+          },
+        ],
       };
     }
 
     return {
-      resources: [].concat.apply([], this.subattachments.data.map(e => e.getAttachments2())),
-      title: this.title
-    }
-
+      resources: [].concat.apply(
+        [],
+        this.subattachments.data.map((e) => e.getAttachments2())
+      ),
+      title: this.title,
+    };
   }
 }
 
@@ -58,6 +84,10 @@ export class FacebookPost {
     this.shares = shares;
   }
 
+  getDescription() {
+    return this.description;
+  }
+
   toPreview() {
     return {
       message: this.message,
@@ -73,7 +103,7 @@ export class FacebookPost {
 
     return data
       .filter((facebookData) => {
-        return (facebookData instanceof FacebookAttachmentData);
+        return facebookData instanceof FacebookAttachmentData;
       })
       .map((facebookData) => facebookData.getAttachments());
   }
@@ -83,7 +113,8 @@ export class FacebookPost {
       id: this.id,
       message: this.message,
       created_time: this.created_time,
-      attachments: this.getAttachments()
+      attachments: this.getAttachments(),
+      description: this.getDescription(),
     };
   }
 }
@@ -108,7 +139,6 @@ export class FacebookPostMap {
 }
 
 export class FacebookAttachmentDataMap {
-
   static fromPrimitives(rawData) {
     if (rawData.subattachments && rawData.subattachments.data) {
       rawData.subattachments.data = rawData.subattachments.data.map(
