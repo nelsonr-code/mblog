@@ -48,7 +48,7 @@ export class FacebookService extends SocialMediaService {
           until,
           since,
           access_token,
-          limit: 1000,
+          limit: 5000,
         },
       })
       .then((r) => r.data);
