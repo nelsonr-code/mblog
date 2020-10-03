@@ -1,5 +1,6 @@
 import React from "react";
 import MaterialTable from "material-table";
+import { Paper } from "@material-ui/core";
 
 const defaultOptions = {
   search: false,
@@ -23,6 +24,10 @@ export const CustomTable = React.forwardRef(({ configuration }, ref) => {
       actions={[...configuration.actions]}
       options={{ ...defaultOptions, ...(configuration.options || {}) }}
       isLoading={configuration.isLoading === true}
+      elevation={0}
+      components={{
+        Container: props => <Paper elevation={0} {...props}> {props.children} </Paper>
+      }}
     />
   );
 });

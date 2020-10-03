@@ -8,6 +8,7 @@ import { FacebookPostPreview } from "app/main/application/pages/FacebookPosts/co
 import { useDialog } from "app/hooks/useDialog";
 import { DateCustomFilter } from "app/main/shared/DateCustomFilter";
 import moment from "moment";
+import { Box, Paper, Typography, useTheme } from "@material-ui/core";
 
 export const FacebookPostsList = () => {
   const {
@@ -42,6 +43,7 @@ export const FacebookPostsList = () => {
 
     console.log("desde el modal", a);
   };
+  const theme = useTheme();
 
   React.useEffect(() => {
     loadPosts({
@@ -114,7 +116,21 @@ export const FacebookPostsList = () => {
         visible={error}
         retryAction={() => loadPosts({ dateFilter: dateRange })}
       />
-      <CustomTable configuration={configuration} ref={tableRef} />
+      <Paper>
+        <Box p={1}>
+          <Typography variant="subtitle1" style={{textAlign: 'right'}}>
+            {t("ondemand", {
+              es: "Cantidad de posts en el rango de fecha seleccionado: ",
+              en: "Quantity of posts in selected range: ",
+            })}{" "}
+            <span style={{ color: theme.palette.primary.main }}>
+              {" "}
+              {posts.length}{" "}
+            </span>
+          </Typography>
+          <CustomTable configuration={configuration} ref={tableRef} />
+        </Box>
+      </Paper>
     </>
   );
 };
