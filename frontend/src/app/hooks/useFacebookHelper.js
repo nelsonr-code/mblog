@@ -19,7 +19,7 @@ export const useFacebookHelper = () => {
     console.log(query);
     return mainService
       .getFacebookPosts(user.id, query)
-      .then(({ data }) => {
+      .then(({ data, paging }) => {
         setPosts(data);
       })
       .catch((err) => {
