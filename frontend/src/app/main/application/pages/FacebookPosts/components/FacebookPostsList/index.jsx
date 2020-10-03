@@ -23,7 +23,7 @@ export const FacebookPostsList = () => {
   const { open } = useDialog();
 
   const defaultRange = {
-    startDate: moment().subtract(1, "week").toDate(),
+    startDate: moment().subtract(5000, "week").toDate(),
     endDate: moment().toDate(),
     key: "selection",
   };
