@@ -30,7 +30,7 @@ export class FacebookService extends SocialMediaService {
   }
 
   getPosts(access_token, since, until) {
-    let url = `${FacebookService.BASE_URL}/me/posts`;
+    let url = `${FacebookService.BASE_URL}/me/feed`;
     console.log(
       "los posts de facebookkkkkkkkkkk",
       { since },
@@ -48,7 +48,7 @@ export class FacebookService extends SocialMediaService {
           until,
           since,
           access_token,
-          limit: 5000,
+          limit: 300,
         },
       })
       .then((r) => r.data);
@@ -84,7 +84,7 @@ export class FacebookService extends SocialMediaService {
     );
     console.log("uri encoded", uri);
     return [
-      `https://www.facebook.com/v6.0/dialog/oauth?app_id=528622281368798&`,
+      `https://www.facebook.com/v8.0/dialog/oauth?app_id=528622281368798&`,
       `redirect_uri=${uri}`,
       `&state={"user" : "${userId}"}`,
       `&scope=email,user_posts,user_location,user_status,user_videos,user_friends`,
